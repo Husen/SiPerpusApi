@@ -1,0 +1,8 @@
+﻿.idea
+.vs
+.vscode
+.env
+
+SiPerpusApi.sln
+bin/*
+obj/*
