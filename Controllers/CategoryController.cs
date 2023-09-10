@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using SiPerpusApi.Dto.CategoryDto;
 using SiPerpusApi.Dto.ViewModel;
-using SiPerpusApi.Models;
 using SiPerpusApi.Services;
 
 namespace SiPerpusApi.Controllers;

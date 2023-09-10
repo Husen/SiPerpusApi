@@ -1,5 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
+namespace SiPerpusApi.Dto.CategoryDto;
 public class CategoryResponse
 {
     [JsonPropertyName("id")]
