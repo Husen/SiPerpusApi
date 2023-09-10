@@ -6,5 +6,6 @@ public static class ServiceExtension
     {
         service.AddScoped<ICategoryService, CategoryService>();
         service.AddScoped<IPublisherService, PublisherService>();
+        service.AddScoped<IRackService, RackService>();
     }
 }
