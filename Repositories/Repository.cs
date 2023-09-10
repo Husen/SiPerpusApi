@@ -37,11 +37,11 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
 
     public void Update(TEntity entity)
     {
-        throw new NotImplementedException();
+        _dbContext.Set<TEntity>().Update(entity);
     }
 
     public void Delete(TEntity entity)
     {
-        throw new NotImplementedException();
+        _dbContext.Set<TEntity>().Remove(entity);
     }
 }

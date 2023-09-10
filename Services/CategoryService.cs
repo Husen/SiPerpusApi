@@ -1,6 +1,7 @@
 using System.Linq.Expressions;
 using SiPerpusApi.Dto.CategoryDto;
 using SiPerpusApi.Dto.ViewModel;
+using SiPerpusApi.Exceptions;
 using SiPerpusApi.Models;
 using SiPerpusApi.Repositories;
 
@@ -49,7 +50,7 @@ public class CategoryService : ICategoryService
         try
         {
             var category = _repository.FindById(id);
-            if (category is null) return null;
+            if (category is null) throw new NotFoundException("id not found");
             var responseCategory = new CategoryResponse()
             {
                 Id = category.Id,
@@ -122,6 +123,51 @@ public class CategoryService : ICategoryService
             .MakeGenericMethod(typeof(TEntity), property.Type);
 
         return (IQueryable<TEntity>)genericMethod.Invoke(genericMethod, new object[] { query, lambda });
+    }
+    
+    public CategoryResponse UpdateCategory(int id, CategoryRequest categoryRequest)
+    {
+        try
+        {
+            var category = _repository.FindById(id);
+            if (category is null) throw new NotFoundException("id not found");
+            category.NameCategory = categoryRequest.NameCategory;
+            category.UpdatedAt = DateTime.UtcNow;
+            
+            _repository.Update(category);
+            _persistence.SaveChanges();
+            var newCategory = _repository.FindById(id);
+
+            var responseCategory = new CategoryResponse()
+            {
+                Id = newCategory.Id,
+                NameCategory = newCategory.NameCategory,
+                CreatedAt = newCategory.CreatedAt,
+                UpdatedAt = newCategory.UpdatedAt
+            };
+            return responseCategory;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+    }
+
+    public void DeleteCategory(int id)
+    {
+        try
+        {
+            var category = _repository.FindById(id);
+            if (category is null) throw new NotFoundException("id not found");
+            _repository.Delete(category);
+            _persistence.SaveChanges();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
     }
 
 }

@@ -36,11 +36,6 @@ public class CategoryController : ControllerBase
     public async Task<IActionResult> GetCategoryById(int id)
     {
         CategoryResponse category = _categoryService.GetById(id);
-        
-        if (category is null)
-        {
-            return NotFound();
-        }
 
         var response = new ApiResponse<CategoryResponse>()
         {
@@ -57,6 +52,35 @@ public class CategoryController : ControllerBase
     {
         var responseCategories = _categoryService.GetAll(requestPagination);
         return Ok(responseCategories);
+    }
+
+    [HttpPut("{id}")]
+    public async Task<IActionResult> UpdateCategoryById(int id, [Required, FromBody] CategoryRequest categoryRequest)
+    {
+        CategoryResponse category = _categoryService.UpdateCategory(id, categoryRequest);
+        
+        var response = new ApiResponse<CategoryResponse>
+        {
+            Code = 200,
+            Message = "Category update successfully",
+            Status = "S",
+            Data = category
+        };
+        return Ok(response);
+    }
+    
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteCategoryById(int id)
+    {
+        _categoryService.DeleteCategory(id);
+        var response = new ApiResponse<object>
+        {
+            Code = 200,
+            Message = "Category delete successfully",
+            Status = "S",
+            Data = new object[0]
+        };
+        return Ok(response);
     }
     
 }

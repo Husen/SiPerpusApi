@@ -13,8 +13,16 @@ public class RequestPagination
     [JsonPropertyName("searchQuery")]
     public string? SearchQuery { get; set; } = "";
     
+    
+    /// <summary>
+    /// sortBy = id , field etc
+    /// </summary>
     [JsonPropertyName("sortBy")]
     public string? SortBy { get; set; } = "";
+    
+    /// <summary>
+    /// sortDirection = asc || desc
+    /// </summary>
     
     [JsonPropertyName("sortDirection")]
     public string? SortDirection { get; set; } = "";
