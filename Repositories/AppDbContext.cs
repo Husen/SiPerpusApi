@@ -11,6 +11,8 @@ namespace SiPerpusApi.Repositories
         public DbSet<Rack> Racks { get; set; }
         public DbSet<Book> Books { get; set; }
         public DbSet<Member> Members { get; set; }
+        public DbSet<Loan> Loans { get; set; }
+        public DbSet<LoanDetail> LoanDetails { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
