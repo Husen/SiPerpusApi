@@ -2,7 +2,7 @@ using System.Reflection;
 using System.Text.Json;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.OpenApi.Models;
-using SiPerpusApi.Dto.ViewModel;
+using SiPerpusApi.Dto;
 using SiPerpusApi.Exceptions;
 using SiPerpusApi.Repositories;
 using SiPerpusApi.Services;

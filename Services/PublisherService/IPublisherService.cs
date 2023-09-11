@@ -1,5 +1,4 @@
-﻿using SiPerpusApi.Dto.PublisherDto;
-using SiPerpusApi.Dto.ViewModel;
+﻿using SiPerpusApi.Dto;
 
 namespace SiPerpusApi.Services;
 

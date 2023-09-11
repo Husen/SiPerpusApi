@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
-namespace SiPerpusApi.Dto.RackDto;
+namespace SiPerpusApi.Dto;
 
 public class BookRequest
 {

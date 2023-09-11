@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace SiPerpusApi.Dto.ViewModel;
+namespace SiPerpusApi.Dto;
 
 public class ApiPaginationResponse<T>
 {

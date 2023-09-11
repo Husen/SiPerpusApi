@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
-using SiPerpusApi.Dto.RackDto;
-using SiPerpusApi.Dto.ViewModel;
+using SiPerpusApi.Dto;
 using SiPerpusApi.Services;
 
 namespace SiPerpusApi.Controllers;

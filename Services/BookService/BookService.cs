@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SiPerpusApi.Dto.RackDto;
-using SiPerpusApi.Dto.ViewModel;
+using SiPerpusApi.Dto;
 using SiPerpusApi.Exceptions;
 using SiPerpusApi.Helpers;
 using SiPerpusApi.Models;

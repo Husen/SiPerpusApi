@@ -1,5 +1,4 @@
-﻿using SiPerpusApi.Dto.CategoryDto;
-using SiPerpusApi.Dto.ViewModel;
+﻿using SiPerpusApi.Dto;
 using SiPerpusApi.Models;
 
 namespace SiPerpusApi.Services;

@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace SiPerpusApi.Dto.PublisherDto;
+namespace SiPerpusApi.Dto;
 
 public class PublisherResponse
 {
