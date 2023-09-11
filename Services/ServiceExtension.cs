@@ -1,4 +1,6 @@
-﻿namespace SiPerpusApi.Services;
+﻿using SiPerpusApi.Services;
+
+namespace SiPerpusApi.Services;
 
 public static class ServiceExtension
 {
@@ -8,5 +10,6 @@ public static class ServiceExtension
         service.AddScoped<IPublisherService, PublisherService>();
         service.AddScoped<IRackService, RackService>();
         service.AddScoped<IBookService, BookService>();
+        service.AddScoped<IMemberService, MemberService>();
     }
 }
