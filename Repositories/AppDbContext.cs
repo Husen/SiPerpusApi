@@ -16,10 +16,16 @@ namespace SiPerpusApi.Repositories
         public DbSet<Role> Roles { get; set; }
         public DbSet<User> Users { get; set; }
 
+        private readonly IConfiguration _configuration;
+
+        public AppDbContext(DbContextOptions<AppDbContext> options, IConfiguration configuration) : base(options)
+        {
+            _configuration = configuration;
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            Env.Load();
-            string connectionString = Env.GetString("CONNECTION_STRING");
+            string connectionString = _configuration.GetConnectionString("DefaultConnection");
             
             if (!string.IsNullOrEmpty(connectionString))
             {
