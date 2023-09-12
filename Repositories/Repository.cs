@@ -1,3 +1,5 @@
+using System.Linq.Expressions;
+
 namespace SiPerpusApi.Repositories;
 
 public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
@@ -20,9 +22,9 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
         return _dbContext.Set<TEntity>().Find(id);
     }
 
-    public TEntity? FindBy(Func<TEntity, bool> predicate)
+    public TEntity? FindBy(Expression<Func<TEntity, bool>> predicate)
     {
-        throw new NotImplementedException();
+        return _dbContext.Set<TEntity>().FirstOrDefault(predicate);
     }
 
     public IQueryable<TEntity> FindAll()

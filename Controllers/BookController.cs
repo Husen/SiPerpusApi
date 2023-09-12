@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SiPerpusApi.Dto;
 using SiPerpusApi.Services;
@@ -16,7 +17,7 @@ public class BookController : ControllerBase
         _bookService = bookService;
     }
 
-    [HttpPost]
+    [HttpPost, Authorize(Roles = "Petugas, Administrasi")]
     public async Task<IActionResult> CreateBook([Required, FromBody] BookRequest bookRequest)
     {
         BookResponse book = _bookService.CreateBook(bookRequest);
@@ -31,6 +32,7 @@ public class BookController : ControllerBase
     }
     
     [HttpGet("{id}")]
+    [Authorize(Roles = "Petugas, Administrasi")]
     public async Task<IActionResult> GetBookById(int id)
     {
         BookResponse book = _bookService.GetById(id);
@@ -46,6 +48,7 @@ public class BookController : ControllerBase
     }
     
     [HttpGet]
+    [Authorize(Roles = "Petugas, Administrasi")]
     public async Task<IActionResult> GetAllBooks([FromQuery] RequestPagination requestPagination)
     {
         var bookResponse = _bookService.GetAll(requestPagination);
@@ -53,6 +56,7 @@ public class BookController : ControllerBase
     }
     
     [HttpPut("{id}")]
+    [Authorize(Roles = "Petugas, Administrasi")]
     public async Task<IActionResult> UpdateBookById(int id, [Required, FromBody] BookRequest bookRequest)
     {
         BookResponse book = _bookService.UpdateBook(id, bookRequest);
@@ -68,6 +72,7 @@ public class BookController : ControllerBase
     }
     
     [HttpDelete("{id}")]
+    [Authorize(Roles = "Petugas, Administrasi")]
     public async Task<IActionResult> DeleteBookById(int id)
     {
         _bookService.DeleteBook(id);

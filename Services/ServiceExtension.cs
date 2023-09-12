@@ -12,5 +12,6 @@ public static class ServiceExtension
         service.AddScoped<IBookService, BookService>();
         service.AddScoped<IMemberService, MemberService>();
         service.AddScoped<ILoanService, LoanService>();
+        service.AddScoped<IAuthService, AuthService>();
     }
 }

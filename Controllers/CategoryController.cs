@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SiPerpusApi.Dto;
 using SiPerpusApi.Services;
@@ -16,7 +17,7 @@ public class CategoryController : ControllerBase
         _categoryService = categoryService;
     }
 
-    [HttpPost]
+    [HttpPost, Authorize(Roles = "Administrasi")]
     public async Task<IActionResult> CreateCategory([Required, FromBody] CategoryRequest categoryRequest)
     {
         CategoryResponse category = _categoryService.CreateCategory(categoryRequest);
@@ -30,7 +31,7 @@ public class CategoryController : ControllerBase
         return Created("api/category", response);
     }
 
-    [HttpGet("{id}")]
+    [HttpGet("{id}"), Authorize(Roles = "Petugas, Administrasi")]
     public async Task<IActionResult> GetCategoryById(int id)
     {
         CategoryResponse category = _categoryService.GetById(id);
@@ -45,7 +46,7 @@ public class CategoryController : ControllerBase
         return Ok(response);
     }
 
-    [HttpGet]
+    [HttpGet, Authorize(Roles = "Petugas, Administrasi")]
     public async Task<IActionResult> GetAllCategories([FromQuery] RequestPagination requestPagination)
     {
         var responseCategories = _categoryService.GetAll(requestPagination);
@@ -53,6 +54,7 @@ public class CategoryController : ControllerBase
     }
 
     [HttpPut("{id}")]
+    [Authorize(Roles = "Administrasi")]
     public async Task<IActionResult> UpdateCategoryById(int id, [Required, FromBody] CategoryRequest categoryRequest)
     {
         CategoryResponse category = _categoryService.UpdateCategory(id, categoryRequest);
@@ -67,7 +69,7 @@ public class CategoryController : ControllerBase
         return Ok(response);
     }
     
-    [HttpDelete("{id}")]
+    [HttpDelete("{id}"), Authorize(Roles = "Administrasi")]
     public async Task<IActionResult> DeleteCategoryById(int id)
     {
         _categoryService.DeleteCategory(id);

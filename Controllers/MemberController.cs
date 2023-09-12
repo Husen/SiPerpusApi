@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SiPerpusApi.Dto;
 using SiPerpusApi.Services;
@@ -17,6 +18,7 @@ public class MemberController : ControllerBase
     }
     
     [HttpPost]
+    [Authorize(Roles = "Administrasi")]
     public async Task<IActionResult> CreateMember([Required, FromBody] MemberRequest memberRequest)
     {
         MemberResponse member = _memberService.CreateMember(memberRequest);
@@ -31,6 +33,7 @@ public class MemberController : ControllerBase
     }
 
     [HttpGet("{id}")]
+    [Authorize(Roles = "Petugas, Administrasi")]
     public async Task<IActionResult> GetMemberById(int id)
     {
         MemberResponse member = _memberService.GetById(id);
@@ -46,6 +49,7 @@ public class MemberController : ControllerBase
     }
 
     [HttpGet]
+    [Authorize(Roles = "Petugas, Administrasi")]
     public async Task<IActionResult> GetAllCategories([FromQuery] RequestPagination requestPagination)
     {
         var responseCategories = _memberService.GetAll(requestPagination);
@@ -53,6 +57,7 @@ public class MemberController : ControllerBase
     }
 
     [HttpPut("{id}")]
+    [Authorize(Roles = "Administrasi")]
     public async Task<IActionResult> UpdateMemberById(int id, [Required, FromBody] MemberRequest memberRequest)
     {
         MemberResponse member = _memberService.UpdateMember(id, memberRequest);
@@ -68,6 +73,7 @@ public class MemberController : ControllerBase
     }
     
     [HttpDelete("{id}")]
+    [Authorize(Roles = "Administrasi")]
     public async Task<IActionResult> DeleteMemberById(int id)
     {
         _memberService.DeleteMember(id);

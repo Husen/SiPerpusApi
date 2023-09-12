@@ -13,6 +13,8 @@ namespace SiPerpusApi.Repositories
         public DbSet<Member> Members { get; set; }
         public DbSet<Loan> Loans { get; set; }
         public DbSet<LoanDetail> LoanDetails { get; set; }
+        public DbSet<Role> Roles { get; set; }
+        public DbSet<User> Users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

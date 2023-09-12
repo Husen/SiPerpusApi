@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SiPerpusApi.Dto;
 using SiPerpusApi.Services;
@@ -17,6 +18,7 @@ public class LoanController : Controller
     }
 
     [HttpPost]
+    [Authorize(Roles = "Petugas, Administrasi")]
     public async Task<IActionResult> CreateLoan([Required, FromBody] CreateLoanRequest createLoanRequest)
     {
         var loan = _loanService.CreateLoan(createLoanRequest);
@@ -31,6 +33,7 @@ public class LoanController : Controller
     }
     
     [HttpGet("{id}")]
+    [Authorize(Roles = "Petugas, Administrasi")]
     public async Task<IActionResult> GetLoanById(int id)
     {
         LoanResponse loan = _loanService.GetById(id);
@@ -46,6 +49,7 @@ public class LoanController : Controller
     }
     
     [HttpGet]
+    [Authorize(Roles = "Petugas, Administrasi")]
     public async Task<IActionResult> GetAllBooks([FromQuery] RequestPagination requestPagination)
     {
         var bookResponse = _loanService.GetAll(requestPagination);
@@ -53,6 +57,7 @@ public class LoanController : Controller
     }
     
     [HttpPut("return/{id}")]
+    [Authorize(Roles = "Petugas, Administrasi")]
     public async Task<IActionResult> ReturnedLoan(int id, [Required, FromBody] ReturnedLoanRequest returnedLoanRequest)
     {
         LoanResponse loan = _loanService.ReturnedLoan(id, returnedLoanRequest);

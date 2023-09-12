@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SiPerpusApi.Dto;
 using SiPerpusApi.Services;
@@ -17,6 +18,7 @@ public class PublisherController : ControllerBase
     }
     
     [HttpPost]
+    [Authorize(Roles = "Administrasi")]
     public async Task<IActionResult> CreatePublisher([Required, FromBody] PublisherRequest publisherRequest)
     {
         PublisherResponse publisher = _publisherService.CreatePublisher(publisherRequest);
@@ -31,6 +33,7 @@ public class PublisherController : ControllerBase
     }
 
     [HttpGet("{id}")]
+    [Authorize(Roles = "Petugas, Administrasi")]
     public async Task<IActionResult> GetPublisherById(int id)
     {
         PublisherResponse publisher = _publisherService.GetById(id);
@@ -46,6 +49,7 @@ public class PublisherController : ControllerBase
     }
 
     [HttpGet]
+    [Authorize(Roles = "Petugas, Administrasi")]
     public async Task<IActionResult> GetAllPublishers([FromQuery] RequestPagination requestPagination)
     {
         var responsePublishers = _publisherService.GetAll(requestPagination);
@@ -53,6 +57,7 @@ public class PublisherController : ControllerBase
     }
 
     [HttpPut("{id}")]
+    [Authorize(Roles = "Administrasi")]
     public async Task<IActionResult> UpdatePublisherById(int id, [Required, FromBody] PublisherRequest publisherRequest)
     {
         PublisherResponse publisher = _publisherService.UpdatePublisher(id, publisherRequest);
@@ -68,6 +73,7 @@ public class PublisherController : ControllerBase
     }
     
     [HttpDelete("{id}")]
+    [Authorize(Roles = "Administrasi")]
     public async Task<IActionResult> DeletePublisherById(int id)
     {
         _publisherService.DeletePublisher(id);

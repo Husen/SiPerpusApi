@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SiPerpusApi.Dto;
 using SiPerpusApi.Services;
@@ -17,6 +18,7 @@ public class RackController : ControllerBase
     }
     
     [HttpPost]
+    [Authorize(Roles = "Administrasi")]
     public async Task<IActionResult> CreateRack([Required, FromBody] RackRequest rackRequest)
     {
         RackResponse rack = _rackService.CreateRack(rackRequest);
@@ -31,6 +33,7 @@ public class RackController : ControllerBase
     }
 
     [HttpGet("{id}")]
+    [Authorize(Roles = "Petugas, Administrasi")]
     public async Task<IActionResult> GetRackById(int id)
     {
         RackResponse rack = _rackService.GetById(id);
@@ -46,6 +49,7 @@ public class RackController : ControllerBase
     }
 
     [HttpGet]
+    [Authorize(Roles = "Petugas, Administrasi")]
     public async Task<IActionResult> GetAllRacks([FromQuery] RequestPagination requestPagination)
     {
         var responseRacks = _rackService.GetAll(requestPagination);
@@ -53,6 +57,7 @@ public class RackController : ControllerBase
     }
 
     [HttpPut("{id}")]
+    [Authorize(Roles = "Administrasi")]
     public async Task<IActionResult> UpdateRackById(int id, [Required, FromBody] RackRequest rackRequest)
     {
         RackResponse rack = _rackService.UpdateRack(id, rackRequest);
@@ -68,6 +73,7 @@ public class RackController : ControllerBase
     }
     
     [HttpDelete("{id}")]
+    [Authorize(Roles = "Administrasi")]
     public async Task<IActionResult> DeleteRackById(int id)
     {
         _rackService.DeleteRack(id);
