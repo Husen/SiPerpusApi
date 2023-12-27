@@ -15,7 +15,7 @@ Fitur Utama:
 - Swagger for documentation API
 
 ****
-### Spesification :
+### Url :
 https://localhost:7158/swagger/index.html
 
 ****
