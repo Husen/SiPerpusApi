@@ -14,6 +14,9 @@ Fitur Utama:
 - Database : PostgreSql
 - Swagger for documentation API
 
+****
+### Spesification :
+https://localhost:7158/swagger/index.html
 
 ****
 ### Rules :
