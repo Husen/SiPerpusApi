@@ -5,11 +5,11 @@ namespace SiPerpusApi.Dto;
 
 public class LoginRequest
 {
-    [DefaultValue("husen@gmail.com")]
+    [DefaultValue("anda@gmail.com")]
     [JsonPropertyName("email")]
     public string Email { get; set; }
     
-    [DefaultValue("Password123")]
+    [DefaultValue("Qwerty111")]
     [JsonPropertyName("password")]
     public string Password { get; set; }
 }
