@@ -23,3 +23,9 @@ https://localhost:7158/swagger/index.html
 - Change configuration database on appsetting.json and appsetting.Development.json
 - execute your command line : dotnet ef database update
 - finsih, and good luck :)
+
+****
+### CREATE MIGRATIONS :
+dotnet ef migrations add NAME_MIGRATION
+### RUN MIGRATIONS ON DB :
+dotnet ef database update

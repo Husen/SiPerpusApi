@@ -26,9 +26,11 @@ builder.Services.AddControllers()
 builder.Services.AddEndpointsApiExplorer();
 
 // Swagger Configuration
+builder.Services.Configure<SwaggerAuthOptions>(builder.Configuration.GetSection("SwaggerAuthOptions"));
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "SI-PERPUS Public API", Version = "v1" });
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "SI-PERPUS Private API", Version = "v1" });
+    c.SwaggerDoc("v2", new OpenApiInfo { Title = "SI-PERPUS Public API", Version = "v1" });
     
     // xml summary
     var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
@@ -99,8 +101,15 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    app.UseSwaggerAuthorized();
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c =>
+    {
+        c.DocumentTitle = "SI-PERPUS Open API";
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "SI-PERPUS Private API V1");
+        c.SwaggerEndpoint("/swagger/v2/swagger.json", "SI-PERPUS Public API V1");
+
+    });
 }
 
 app.UseHttpsRedirection();
